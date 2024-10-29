@@ -1,12 +1,20 @@
 fn main() {
     println!("Hello, world!");
-    crumbs::crumbs_desktop();
+    crumbs::on_desktop();
 }
 
-
-
 pub mod crumbs {
-    pub fn crumbs_desktop() {
-        std::println!("desktop ran temp");
+    use std::{fs::File, io::{self}, path::Path};
+
+    pub fn on_desktop() {
+        std::println!("breadcrumb::main::crumbs::on_desktop -> started...");
+        
+        let computer_username: String = whoami::username();
+        let target_path_string: String = "C:/Documents and Settings/".to_string() + &computer_username + "/Desktop/breadcrumb.txt";
+        let target_path = Path::new(&target_path_string);
+        let mut file = File::create(target_path).expect("creation failed");
+
+        io::Write::write(&mut file, "Hello, World!".as_bytes()).expect("write failed");
+        println!("Created a file data.txt");
     }
 }
