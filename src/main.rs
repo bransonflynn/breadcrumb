@@ -14,7 +14,10 @@ pub mod crumbs {
         let target_path = Path::new(&target_path_string);
         let mut file = File::create(target_path).expect("on_desktop -> create failed");
 
-        io::Write::write(&mut file, "Hello, World!".as_bytes()).expect("on_desktop -> write failed");
+        // the text to be written
+        let text = String::from("Hello, World!");
+
+        io::Write::write(&mut file, text.as_bytes()).expect("on_desktop -> write failed");
         std::println!("breadcrumb::main::crumbs::on_desktop -> finished!");
     }
 }
