@@ -9,7 +9,6 @@ pub fn on_desktop() {
     std::println!("breadcrumb::main::crumbs::on_desktop -> started...");
 
     let computer_username: String = whoami::username();
-
     let target_path_string: String =
         "C:/Documents and Settings/".to_string() + &computer_username + "/Desktop/breadcrumb.txt";
     let target_path: &Path = Path::new(&target_path_string);
