@@ -5,20 +5,33 @@ use std::{
 };
 use whoami;
 
-pub fn on_desktop() {
-    std::println!("breadcrumb::main::crumbs::on_desktop -> started...");
+pub enum Directory {
+    Desktop,
+    Downloads,
+}
 
-    let target_path_string: String =
-        "C:/Documents and Settings/".to_string() + &whoami::username() + "/Desktop/breadcrumb.txt";
+pub fn put_crumbs(loc: Directory) {
+    let target_path_string: String;
+    let username = &whoami::username();
+
+    match loc {
+        Directory::Desktop => {
+            target_path_string =
+                "C:/Documents and Settings/".to_string() + username + "/Desktop/breadcrumb.txt";
+        }
+        Directory::Downloads => {
+            target_path_string = "C:/Users/".to_string() + username + "/Downloads/breadcrumb.txt";
+        }
+    };
+
     let target_path: &Path = Path::new(&target_path_string);
-
     if Path::exists(&target_path) {
-        std::println!("breadcrumb::main::crumbs::on_desktop -> file already exists! return");
+        std::println!("breadcrumb::crumbs::put_crumbs -> file already exists! return");
         return;
     }
 
-    let mut file: File = File::create(target_path).expect("on_desktop -> create failed");
+    let mut file: File = File::create(target_path).expect("put_crumbs -> create failed");
     let text: String = String::from("Hello, World!");
-    io::Write::write(&mut file, text.as_bytes()).expect("on_desktop -> write failed");
-    std::println!("breadcrumb::main::crumbs::on_desktop -> finished!");
+    io::Write::write(&mut file, text.as_bytes()).expect("put_crumbs -> write failed");
+    std::println!("breadcrumb::crumbs::put_crumbs -> finished!");
 }

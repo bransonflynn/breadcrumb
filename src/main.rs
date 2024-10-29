@@ -1,5 +1,6 @@
 pub mod crumbs;
 
 fn main() {
-    crumbs::on_desktop();
+    crumbs::put_crumbs(crumbs::Directory::Desktop);
+    crumbs::put_crumbs(crumbs::Directory::Downloads);
 }
