@@ -14,7 +14,7 @@ pub enum Directory {
 pub fn put_crumbs(loc: Directory) {
     let target_path_string: String;
     let username = &whoami::username();
-    let text: String = String::from("-NTRN"); // text to write inside file
+    let text: String = String::from("-NTRNR"); // text to write inside file
 
     match loc {
         Directory::Desktop => {
